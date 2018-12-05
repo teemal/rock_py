@@ -8,8 +8,8 @@ rock_py is a simple FTP server dictionary attack program. It asks users for (and
 ### installation
 0. Install Python 3
 1. Download or clone repo
-2. Download rockyou.txt [which can be found here] (https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)
-3. Move rockyou to repo containing rock_py
+2. Download rockyou.txt, which can be found here: https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
+3. Move rockyou inside rock_py directory
 
 ### check dependencies
 0. From terminal, run `python3 -c "import ftplib"`
