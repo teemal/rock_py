@@ -14,10 +14,10 @@ rock_py is a simple FTP server dictionary attack program. It asks users for (and
 ### check dependencies
 0. From terminal, run `python3 -c "import ftplib"`
 1. run `echo $?`
-..* if output != 0, install ftplib by running `pip3 install ftplib`
++ if output != 0, install ftplib by running `pip3 install ftplib`
 2. From terminal, run `python3 -c "import time"`
 3. run `echo $?`
-..* if output != 0, install time by running `pip3 install time`
++ if output != 0, install time by running `pip3 install time`
 
 ### to run rock_py
 0. Move to directory containing rock_py
@@ -27,5 +27,5 @@ rock_py is a simple FTP server dictionary attack program. It asks users for (and
 
 
 #### TODO
--handle server disconnect
--multithread
++handle server disconnect
++multithread
