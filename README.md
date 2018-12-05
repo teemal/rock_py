@@ -27,5 +27,5 @@ rock_py is a simple FTP server dictionary attack program. It asks users for (and
 
 
 #### TODO
-handle server disconnect
-multithread
+0. handle server disconnect
+1. multithread
